@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DriverManagement.Infrasctructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230919200828_InitialSetup")]
-    partial class InitialSetup
+    [Migration("20230919213437_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,6 @@ namespace DriverManagement.Infrasctructure.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("city");
 
@@ -49,17 +48,14 @@ namespace DriverManagement.Infrasctructure.Migrations
                         .HasColumnName("driving_license_expiration_date");
 
                     b.Property<string>("DrivingLicenseNumber")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("driving_license_number");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("email");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
 
@@ -68,7 +64,7 @@ namespace DriverManagement.Infrasctructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Drivers", "drivers_management");
+                    b.ToTable("drivers", "drivers_management");
                 });
 #pragma warning restore 612, 618
         }
