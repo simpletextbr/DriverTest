@@ -31,7 +31,7 @@ namespace DriverManagement.Infrastructure.Configurations
             .HasColumnName("city");
 
 
-            builder.ToTable("Drivers", schema: "drivers_management");
+            builder.ToTable("drivers", schema: "drivers_management");
         }
     }
 }

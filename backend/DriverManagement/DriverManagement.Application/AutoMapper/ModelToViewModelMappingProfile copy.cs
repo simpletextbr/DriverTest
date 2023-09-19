@@ -8,7 +8,7 @@ namespace DriverManagement.Application.AutoMapper
     {
         public ModelToViewModelMappingProfile()
         {
-            CreateMap<DriverModel, DriverViewModel>();
+            CreateMap<DriverModel, DriverViewModel>().ReverseMap();
         }
     }
 

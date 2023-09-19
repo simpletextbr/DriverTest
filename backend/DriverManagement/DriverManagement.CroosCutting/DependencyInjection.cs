@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using DriverManagement.Domain.interfaces;
+using DriverManagement.Infrasctructure.Repositories;
 using DriverManagement.Infrastructure.Context;
+using DriverManagement.Services.Interfaces;
+using DriverManagement.Services.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +14,13 @@ namespace DriverManagement.CroosCutting
     {
         public static void AddDependencies(this IServiceCollection services, IConfiguration configuration){
             
+            #region Repositories
+            services.AddScoped<IDriverRepository, DriverRepository>();
+            #endregion
 
+            #region Services
+            services.AddScoped<IDriverManagementService, DriverManagementService>();
+            #endregion
 
 
             #region DbContext

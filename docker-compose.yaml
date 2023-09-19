@@ -4,9 +4,9 @@ services:
   backend:
     container_name: backend
     build:
-      context: backend/DriverManagement/DriverManagement.Api
+      context: backend/DriverManagement
       dockerfile: Dockerfile
-    entrypoint: dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh dotnet DriverManagement.Api.dll
+    entrypoint: dockerize -wait tcp://db:5432 -timeout 20s dotnet DriverManagement.Api.dll
     ports:
       - "5000:80"
     depends_on:

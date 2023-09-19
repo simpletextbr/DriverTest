@@ -4,7 +4,7 @@ namespace DriverManagement.Application.AutoMapper
 {
     public class AutoMapperSetup
     {
-        public static MapperConfiguration RegisterMappings()
+        public static MapperConfiguration RegisterMapping()
         {
             return new MapperConfiguration(cfg =>
             {

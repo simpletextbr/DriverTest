@@ -17,7 +17,6 @@ namespace DriverManagement.Infrastructure.Context
 
         public DbSet<DriverModel> Drivers => Set<DriverModel>();
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
