@@ -13,27 +13,21 @@ namespace DriverManagement.Infrastructure.Configurations
             builder.Property(x => x.Id).HasColumnName("id");
 
             builder.Property(x => x.Name)
-            .IsRequired()
             .HasColumnName("name");
 
             builder.Property(x => x.DateOfBirth)
-            .IsRequired()
             .HasColumnName("date_of_birth");
 
             builder.Property(x => x.DrivingLicenseNumber)
-            .IsRequired()
             .HasColumnName("driving_license_number");
 
             builder.Property(x => x.DrivingLicenseExpirationDate)
-            .IsRequired()
             .HasColumnName("driving_license_expiration_date");
 
             builder.Property(x => x.Email)
-            .IsRequired()
             .HasColumnName("email");
 
             builder.Property(x => x.City)
-            .IsRequired()
             .HasColumnName("city");
 
 

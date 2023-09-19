@@ -1,6 +1,8 @@
+using DriverManagement.Domain.Models;
+
 namespace DriverManagement.Domain
 {
-    public interface IBaseRepository<T> : BaseModel
+    public interface IBaseRepository<T> : IDisposable
     {
         Task<List<T>> GetAll();
         Task<T> GetById(Guid id);

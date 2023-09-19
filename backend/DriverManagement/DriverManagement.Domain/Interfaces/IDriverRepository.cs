@@ -1,4 +1,4 @@
-
+using DriverManagement.Domain.Models;
 
 namespace DriverManagement.Domain.interfaces
 {

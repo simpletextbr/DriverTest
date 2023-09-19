@@ -6,11 +6,16 @@ namespace DriverManagement.Infrastructure.Context
 {
     public class ApplicationContext : DbContext
     {
+
+        public ApplicationContext()
+        {
+        }
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
         }
 
-        public DbSet<DriverModel> Drivers { get; set; }
+        public DbSet<DriverModel> Drivers => Set<DriverModel>();
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
