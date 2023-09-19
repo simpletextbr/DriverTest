@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  backend:
+    container_name: backend
+    build:
+      context: backend/DriverManagement/DriverManagement.Api
+      dockerfile: Dockerfile
+    entrypoint: dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh dotnet DriverManagement.Api.dll
+    ports:
+      - "5000:80"
+    depends_on:
+      - db
+
+  db:
+    container_name: db
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: DriverManagement
+    ports:
+      - "2345:5432"
+
+networks:
+  driver-management-net:
+    driver: bridge
