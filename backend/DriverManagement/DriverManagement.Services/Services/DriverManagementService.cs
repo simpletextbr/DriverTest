@@ -1,6 +1,7 @@
-
+using AutoMapper;
 using DriverManagement.Application.ViewModels;
 using DriverManagement.Domain.interfaces;
+using DriverManagement.Domain.Models;
 using DriverManagement.Services.Interfaces;
 
 namespace DriverManagement.Services.Services
@@ -8,30 +9,59 @@ namespace DriverManagement.Services.Services
     public class DriverManagementService : IDriverManagementService
     {
         protected readonly IDriverRepository _driverRepository;
+        protected readonly IMapper _mapper;
 
-        public Task<DriverViewModel> Create(DriverViewModel entity)
+        public DriverManagementService(IDriverRepository driverRepository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _driverRepository = driverRepository;
+            _mapper = mapper;
         }
 
-        public Task Delete(Guid id)
+        public async Task<DriverViewModel> Create(DriverViewModel entity)
         {
-            throw new NotImplementedException();
+            var driver = _mapper.Map<DriverModel>(entity);
+            var result = await _driverRepository.Create(driver);
+            return _mapper.Map<DriverViewModel>(result);
         }
 
-        public Task<List<DriverViewModel>> GetAll()
+        public async Task Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var driver = await _driverRepository.GetById(id);
+
+            if(driver == null)
+                throw new Exception("Driver not found");
+
+             await _driverRepository.Delete(id);
         }
 
-        public Task<DriverViewModel> GetById(Guid id)
+        public async Task<List<DriverViewModel>> GetAll()
         {
-            throw new NotImplementedException();
+            var driver = await _driverRepository.GetAll();
+            var result = _mapper.Map<List<DriverViewModel>>(driver);
+            return result;
         }
 
-        public Task<DriverViewModel> Update(DriverViewModel entity)
+        public async Task<DriverViewModel> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var driver = await _driverRepository.GetById(id);
+
+            if(driver == null)
+                throw new Exception("Driver not found");
+
+            var result = _mapper.Map<DriverViewModel>(driver);
+            return result;
+        }
+
+        public async Task<DriverViewModel> Update(DriverViewModel entity)
+        {
+            var driver = await _driverRepository.GetById(entity.Id);
+             
+            if(driver == null)
+                throw new Exception("Driver not found");
+            
+            driver = _mapper.Map(entity, driver);
+            var result = await _driverRepository.Update(driver);
+            return _mapper.Map<DriverViewModel>(result);
         }
     }
 }
