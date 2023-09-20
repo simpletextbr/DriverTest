@@ -4,11 +4,11 @@ using DriverManagement.Domain.Models;
 
 namespace DriverManagement.Application.AutoMapper
 {
-    public class ModelToViewModelMappingProfile : Profile
+    public class ViewModelToModelMappingProfile : Profile
     {
-        public ModelToViewModelMappingProfile()
+        public ViewModelToModelMappingProfile()
         {
-            CreateMap<DriverModel, DriverViewModel>();
+            CreateMap<DriverViewModel, DriverModel>();
         }
     }
 
