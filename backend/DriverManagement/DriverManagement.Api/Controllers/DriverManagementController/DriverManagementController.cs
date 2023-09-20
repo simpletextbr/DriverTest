@@ -23,35 +23,35 @@ namespace DriverManagement.Api.Controllers.DriverManagementController
         [HttpGet("drivers")]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _driverManagementService.GetAll();
+            var result = await _driverManagementService.GetAllDrivers();
             return Ok(result);
         }
 
         [HttpGet("drivers/{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _driverManagementService.GetById(id);
+            var result = await _driverManagementService.GetDriverById(id);
             return Ok(result);
         }
 
         [HttpPost("drivers")]
         public async Task<IActionResult> Create([FromBody] DriverViewModel driver)
         {
-            var result = await _driverManagementService.Create(driver);
+            var result = await _driverManagementService.CreateDriver(driver);
             return Ok(result);
         }
 
         [HttpPut("drivers")]
         public async Task<IActionResult> Update([FromBody] DriverViewModel driver)
         {
-            var result = await _driverManagementService.Update(driver);
+            var result = await _driverManagementService.UpdateDriver(driver);
             return Ok(result);
         }
 
         [HttpDelete("drivers/{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            await _driverManagementService.Delete(id);
+            await _driverManagementService.DeleteDriver(id);
             return Ok();
         }
     }
