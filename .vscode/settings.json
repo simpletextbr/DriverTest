@@ -1,0 +1,4 @@
+{
+    "dotnet-test-explorer.testProjectPath": "backend/DriverManagement/DriverManagement.Tests",
+    "dotnet-test-explorer.autoWatch": true
+}
