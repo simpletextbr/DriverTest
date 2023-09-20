@@ -17,9 +17,8 @@ import { DeleteDriverInput } from "./interfaces/DeleteDriver.interface";
 
 async function GetAllDrivers(): Promise<List<GetAllDriversOutput>> {
   const response = await api.get("api/DriverManagement/drivers");
-
   const drivers: List<GetAllDriversOutput> = {
-    items: response.data.items,
+    items: response.data,
     totalCount: response.data.length,
   };
 
