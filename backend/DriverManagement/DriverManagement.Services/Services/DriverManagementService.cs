@@ -19,7 +19,17 @@ namespace DriverManagement.Services.Services
 
         public async Task<DriverViewModel> Create(DriverViewModel entity)
         {
-            var driver = _mapper.Map<DriverModel>(entity);
+            var driver = new DriverModel(){
+                Id = Guid.NewGuid(),
+                Name = entity.Name,
+                DateOfBirth = entity.DateOfBirth,
+                DrivingLicenseNumber = entity.DrivingLicenseNumber,
+                DrivingLicenseExpirationDate = entity.DrivingLicenseExpirationDate,
+                Email = entity.Email,
+                City = entity.City
+            };
+
+            
             var result = await _driverRepository.Create(driver);
             return _mapper.Map<DriverViewModel>(result);
         }

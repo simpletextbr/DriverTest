@@ -9,11 +9,11 @@ using DriverManagement.Infrastructure.Context;
 namespace DriverManagement.Infrasctructure.Repositories
 {
 
-    public class DriverManagementRepository : BaseRepository<DriverModel>, IDriverRepository
+    public class DriverRepository : BaseRepository<DriverModel>, IDriverRepository
     {
         protected readonly ApplicationContext _context;
 
-        public DriverManagementRepository(ApplicationContext context) : base(context)
+        public DriverRepository(ApplicationContext context) : base(context)
         {
             _context = context;
         }

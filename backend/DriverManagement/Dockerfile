@@ -16,14 +16,11 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["DriverManagement.Api/DriverManagement.Api.csproj", "DriverManagement.Api/"]
-RUN dotnet restore "DriverManagement.Api/DriverManagement.Api.csproj"
 COPY . .
-WORKDIR "/src/DriverManagement.Api"
-RUN dotnet build "DriverManagement.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "DriverManagement.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN cd ./DriverManagement.Api && \
+    dotnet publish "DriverManagement.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
