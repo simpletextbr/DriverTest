@@ -9,6 +9,7 @@ namespace DriverManagement.Application.AutoMapper
             return new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new ModelToViewModelMappingProfile());
+                cfg.AddProfile(new ViewModelToModelMappingProfile());
             });
         }
     }

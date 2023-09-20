@@ -17,10 +17,12 @@ namespace DriverManagement.Services.Services
             _mapper = mapper;
         }
 
-        public async Task<DriverViewModel> Create(DriverViewModel entity)
+        public async Task<DriverViewModel> CreateDriver(DriverViewModel entity)
         {
+            var id  = entity.Id == Guid.Empty ? Guid.NewGuid() : entity.Id;
+
             var driver = new DriverModel(){
-                Id = Guid.NewGuid(),
+                Id = id,
                 Name = entity.Name,
                 DateOfBirth = entity.DateOfBirth,
                 DrivingLicenseNumber = entity.DrivingLicenseNumber,
@@ -34,24 +36,24 @@ namespace DriverManagement.Services.Services
             return _mapper.Map<DriverViewModel>(result);
         }
 
-        public async Task Delete(Guid id)
+        public async Task DeleteDriver(Guid id)
         {
             var driver = await _driverRepository.GetById(id);
 
             if(driver == null)
-                throw new Exception("Driver not found");
+                throw new Exception("You can't delete a driver that doesn't exist");
 
              await _driverRepository.Delete(id);
         }
 
-        public async Task<List<DriverViewModel>> GetAll()
+        public async Task<List<DriverViewModel>> GetAllDrivers()
         {
             var driver = await _driverRepository.GetAll();
             var result = _mapper.Map<List<DriverViewModel>>(driver);
             return result;
         }
 
-        public async Task<DriverViewModel> GetById(Guid id)
+        public async Task<DriverViewModel> GetDriverById(Guid id)
         {
             var driver = await _driverRepository.GetById(id);
 
@@ -62,12 +64,12 @@ namespace DriverManagement.Services.Services
             return result;
         }
 
-        public async Task<DriverViewModel> Update(DriverViewModel entity)
+        public async Task<DriverViewModel> UpdateDriver(DriverViewModel entity)
         {
             var driver = await _driverRepository.GetById(entity.Id);
              
             if(driver == null)
-                throw new Exception("Driver not found");
+                throw new Exception("You can't update a driver that doesn't exist");
             
             driver = _mapper.Map(entity, driver);
             var result = await _driverRepository.Update(driver);
