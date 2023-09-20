@@ -12,6 +12,17 @@ services:
     depends_on:
       - db
 
+  # frontend:
+  #   container_name: frontend
+  #   build:
+  #     context: frontend/driver-management
+  #     dockerfile: Dockerfile
+  #   entrypoint: dockerize -wait tcp://backend:80 -timeout 20s npm run dev
+  #   ports:
+  #     - "3333:3000"
+  #   depends_on:
+  #     - backend
+
   db:
     container_name: db
     image: postgres
