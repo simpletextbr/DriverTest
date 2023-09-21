@@ -58,11 +58,24 @@ export const buttonDefault = styled.div`
   }
 `;
 
-export const title = styled.p`
-  font-size: 14px;
-  margin-left: 20px;
-  font-weight: 700;
-  color: #1787ee;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  margin-top: 20px;
+  .logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+`;
+
+export const Title = styled.div`
+  font-size: calc(1em + 1vw);
+  font-weight: bold;
+  text-align: center;
+  margin: 20px 0px;
 `;
 
 export default GlobalStyles;
