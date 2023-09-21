@@ -28,6 +28,7 @@ export default function HomePage(): React.JSX.Element {
       toast.success("Motorista deletado com sucesso");
     } catch (error) {
       toast.error("Não foi possível deletar o motorista");
+      setDrivers([]);
     }
   }
 

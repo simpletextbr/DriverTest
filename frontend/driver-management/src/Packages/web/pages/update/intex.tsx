@@ -11,6 +11,7 @@ import { Driver } from "../../../core/api/types";
 import { UpdateDriverInput } from "../../../core/api/DriverManagement/interfaces/UpdateDriver.interface";
 import { Triangle } from "react-loader-spinner";
 import { Container, Title } from "../../styles/globalStyles";
+import moment from "moment";
 
 export default function UpdatePage(): React.JSX.Element {
   const [validated, setValidated] = useState(false);
@@ -125,7 +126,11 @@ export default function UpdatePage(): React.JSX.Element {
                   <Form.Control
                     required
                     type="date"
-                    value={birthDate}
+                    value={
+                      birthDate === ""
+                        ? moment(driverLoaded.dateOfBirth).format("YYYY-MM-DD")
+                        : birthDate
+                    }
                     onChange={(e) => setBirthDate(e.target.value)}
                   />
                 </Form.Group>
@@ -160,7 +165,13 @@ export default function UpdatePage(): React.JSX.Element {
                   <Form.Control
                     required
                     type="date"
-                    value={drivingLicenseExpirationDate}
+                    value={
+                      drivingLicenseExpirationDate === ""
+                        ? moment(
+                            driverLoaded.drivingLicenseExpirationDate
+                          ).format("YYYY-MM-DD")
+                        : drivingLicenseExpirationDate
+                    }
                     onChange={(e) =>
                       setDrivingLicenseExpirationDate(e.target.value)
                     }
