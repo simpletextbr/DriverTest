@@ -1,6 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
-import DetailedPage from "./pages/detailed";
 import RegisterPage from "./pages/register";
 import HomePage from "./pages/home";
 import UpdatePage from "./pages/update/intex";
@@ -10,7 +9,6 @@ export default function Router(): React.JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path="/" Component={HomePage} />
-        <Route path="/detailed/:id" Component={DetailedPage} />
         <Route path="/register" Component={RegisterPage} />
         <Route path="/update/:id" Component={UpdatePage} />
       </Routes>

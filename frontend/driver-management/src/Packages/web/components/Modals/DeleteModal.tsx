@@ -20,7 +20,7 @@ function DeleteModal(proops: DeleteModalProps): React.JSX.Element {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Deletar Motorista</Modal.Title>
         </Modal.Header>
         <Modal.Body>

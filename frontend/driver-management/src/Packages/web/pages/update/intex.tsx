@@ -9,8 +9,8 @@ import {
 } from "../../../core/api/DriverManagement/DriverManagment";
 import { Driver } from "../../../core/api/types";
 import { UpdateDriverInput } from "../../../core/api/DriverManagement/interfaces/UpdateDriver.interface";
-import moment from "moment";
 import { Triangle } from "react-loader-spinner";
+import { Container, Title } from "../../styles/globalStyles";
 
 export default function UpdatePage(): React.JSX.Element {
   const [validated, setValidated] = useState(false);
@@ -46,7 +46,7 @@ export default function UpdatePage(): React.JSX.Element {
           dateOfBirth:
             birthDate === ""
               ? driverLoaded!.dateOfBirth
-              : handleDate(birthDate!),
+              : handleDate(birthDate),
           drivingLicenseNumber:
             drivingLicenseNumber === ""
               ? driverLoaded!.drivingLicenseNumber
@@ -54,7 +54,7 @@ export default function UpdatePage(): React.JSX.Element {
           drivingLicenseExpirationDate:
             drivingLicenseExpirationDate === ""
               ? driverLoaded!.drivingLicenseExpirationDate
-              : handleDate(drivingLicenseExpirationDate!),
+              : handleDate(drivingLicenseExpirationDate),
           email: email === "" ? driverLoaded!.email : email,
           city: city === "" ? driverLoaded!.city : city,
         };
@@ -88,13 +88,13 @@ export default function UpdatePage(): React.JSX.Element {
       }
     }
     getDriver();
-  }, [params.id]);
+  }, [params.id, navigate]);
 
   return (
     <React.Fragment>
-      <S.Title>Editar motorista</S.Title>
+      <Title>Editar motorista</Title>
       {!driverLoaded ? (
-        <S.Container>
+        <Container>
           <Triangle
             height="80"
             width="80"
@@ -103,9 +103,9 @@ export default function UpdatePage(): React.JSX.Element {
             wrapperStyle={{}}
             visible={true}
           />
-        </S.Container>
+        </Container>
       ) : (
-        <S.Container>
+        <Container>
           <S.FormBase>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
               <Row className="mb-1">
@@ -205,7 +205,7 @@ export default function UpdatePage(): React.JSX.Element {
               </S.RowButtons>
             </Form>
           </S.FormBase>
-        </S.Container>
+        </Container>
       )}
     </React.Fragment>
   );
