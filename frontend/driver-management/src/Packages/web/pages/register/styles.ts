@@ -20,11 +20,20 @@ export const Title = styled.div`
   margin: 20px 0px;
 `;
 
-export const CardsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+export const FormBase = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  max-width: 1000px;
-  margin-bottom: 20px;
+  max-width: 40%;
+  height: fit-content;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+`;
+
+export const RowButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 30px 0px;
 `;
