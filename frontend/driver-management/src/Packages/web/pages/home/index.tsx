@@ -4,31 +4,35 @@ import {
   GetAllDrivers,
 } from "../../../core/api/DriverManagement/DriverManagment";
 import { Driver } from "../../../core/api/types";
-import { MagnifyingGlass } from "react-loader-spinner";
+import { Triangle } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import * as S from "./styles";
 import { Alert, Button, Card, Stack } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import DeleteModal from "../../components/Modals/DeleteModal";
+import DetailModal from "../../components/Modals/DetailedModal";
+import { Container, Title } from "../../styles/globalStyles";
 
 export default function HomePage(): React.JSX.Element {
   const [drivers, setDrivers] = useState<Driver[]>();
   const [refresh, setRefresh] = useState<boolean>(false);
-  const [show, setShow] = useState<boolean>(false);
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+  const [showDetailModal, setShowDetailModal] = useState<boolean>(false);
   const navigate = useNavigate();
 
   async function handleDelete(id: string) {
     try {
       await DeleteDriver({ id });
       setRefresh(true);
-      setShow(false);
+      setShowDeleteModal(false);
       toast.success("Motorista deletado com sucesso");
     } catch (error) {
       toast.error("Não foi possível deletar o motorista");
     }
   }
 
-  const handleClose = () => setShow(false);
+  const handleCloseDeleteModal = () => setShowDeleteModal(false);
+  const handleCloseDetailModal = () => setShowDetailModal(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -49,22 +53,20 @@ export default function HomePage(): React.JSX.Element {
 
   return (
     <React.Fragment>
-      <S.Title>Motoritas Cadastrados</S.Title>
+      <Title>Motoritas Cadastrados</Title>
       {!drivers ? (
-        <S.Container>
-          <MagnifyingGlass
-            visible={true}
+        <Container>
+          <Triangle
             height="80"
             width="80"
-            ariaLabel="MagnifyingGlass-loading"
-            wrapperStyle={{}}
-            wrapperClass="MagnifyingGlass-wrapper"
-            glassColor="#c0efff"
             color="#1c02af"
+            ariaLabel="triangle-loading"
+            wrapperStyle={{}}
+            visible={true}
           />
-        </S.Container>
+        </Container>
       ) : (
-        <S.Container>
+        <Container>
           {drivers.length === 0 ? (
             <Alert key="warning" variant="warning">
               Nenhum motorista cadastrado
@@ -83,7 +85,7 @@ export default function HomePage(): React.JSX.Element {
                     <Stack direction="horizontal" gap={3}>
                       <Button
                         variant="primary"
-                        onClick={() => navigate(`/detailed/${driver.id}`)}
+                        onClick={() => setShowDetailModal(true)}
                       >
                         Detalhes
                       </Button>
@@ -93,7 +95,10 @@ export default function HomePage(): React.JSX.Element {
                       >
                         Editar
                       </Button>
-                      <Button variant="danger" onClick={() => setShow(true)}>
+                      <Button
+                        variant="danger"
+                        onClick={() => setShowDeleteModal(true)}
+                      >
                         Deletar
                       </Button>
                     </Stack>
@@ -101,8 +106,13 @@ export default function HomePage(): React.JSX.Element {
                   <DeleteModal
                     id={driver.id.toString()}
                     handleDelete={handleDelete}
-                    show={show}
-                    handleClose={handleClose}
+                    show={showDeleteModal}
+                    handleClose={handleCloseDeleteModal}
+                  />
+                  <DetailModal
+                    id={driver.id.toString()}
+                    show={showDetailModal}
+                    handleClose={handleCloseDetailModal}
                   />
                 </Card>
               ))}
@@ -115,7 +125,7 @@ export default function HomePage(): React.JSX.Element {
           >
             Cadastrar Novo Motorista
           </Button>
-        </S.Container>
+        </Container>
       )}
     </React.Fragment>
   );
