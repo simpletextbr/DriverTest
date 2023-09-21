@@ -12,16 +12,26 @@ services:
     depends_on:
       - db
 
-  # frontend:
-  #   container_name: frontend
-  #   build:
-  #     context: frontend/driver-management
-  #     dockerfile: Dockerfile
-  #   entrypoint: dockerize -wait tcp://backend:80 -timeout 20s npm run dev
-  #   ports:
-  #     - "3333:3000"
-  #   depends_on:
-  #     - backend
+  proxy:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    tty: true # -it
+    ports:
+      - "3001:3000"
+    depends_on:
+      - frontend
+
+  frontend:
+    container_name: frontend
+    build:
+      context: frontend/driver-management
+      dockerfile: Dockerfile
+    tty: true
+    entrypoint: docker-entrypoint.sh npm run dev -- --port 3001
+    depends_on:
+      - backend
 
   db:
     container_name: db
@@ -31,7 +41,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: DriverManagement
+      POSTGRES_DB: drivers
     ports:
       - "2345:5432"
 

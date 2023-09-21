@@ -16,7 +16,7 @@ import {
 import { DeleteDriverInput } from "./interfaces/DeleteDriver.interface";
 
 async function GetAllDrivers(): Promise<List<GetAllDriversOutput>> {
-  const response = await api.get("api/DriverManagement/drivers");
+  const response = await api.get("/drivers");
   const drivers: List<GetAllDriversOutput> = {
     items: response.data,
     totalCount: response.data.length,
@@ -28,7 +28,7 @@ async function GetAllDrivers(): Promise<List<GetAllDriversOutput>> {
 async function GetDriverById(
   input: GetDriverByIdInput
 ): Promise<GetDriverByIdOutput> {
-  const response = await api.get(`api/DriverManagement/drivers/${input.id}`);
+  const response = await api.get(`/drivers/${input.id}`);
 
   const driver: GetDriverByIdOutput = {
     id: response.data,
@@ -46,7 +46,7 @@ async function GetDriverById(
 async function CreateDriver(
   input: CreateDriverInput
 ): Promise<CreateDriverOutput> {
-  const response = await api.post("api/DriverManagement/drivers", input);
+  const response = await api.post("/drivers", input);
 
   const driver: CreateDriverOutput = {
     id: response.data,
@@ -64,7 +64,7 @@ async function CreateDriver(
 async function UpdateDriver(
   input: UpdateDriverInput
 ): Promise<UpdateDriverOutput> {
-  const response = await api.put("api/DriverManagement/drivers", input);
+  const response = await api.put("/drivers", input);
 
   const driver: UpdateDriverOutput = {
     id: response.data,
@@ -80,7 +80,7 @@ async function UpdateDriver(
 }
 
 async function DeleteDriver(input: DeleteDriverInput): Promise<void> {
-  await api.delete(`api/DriverManagement/drivers/${input.id}`);
+  await api.delete(`/drivers/${input.id}`);
 }
 
 export {

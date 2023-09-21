@@ -2,19 +2,18 @@ import { Button, Modal } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { Driver } from "../../../core/api/types";
 import { GetDriverById } from "../../../core/api/DriverManagement/DriverManagment";
-import { useNavigate } from "react-router-dom";
 import { Triangle } from "react-loader-spinner";
 import { Container } from "../../pages/register/styles";
 import moment from "moment";
 import * as S from "./styles";
 
-type DeleteModalProps = {
+type DetailModalProps = {
   id: string;
   show: boolean;
   handleClose: () => void;
 };
 
-function DetailModal(proops: DeleteModalProps): React.JSX.Element {
+function DetailModal(proops: DetailModalProps): React.JSX.Element {
   const [driverLoaded, setDriverLoaded] = useState<Driver>();
   const [age, setAge] = useState<number>(0);
 
@@ -33,8 +32,6 @@ function DetailModal(proops: DeleteModalProps): React.JSX.Element {
     setAge(age);
   }
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     async function getDriver() {
       try {
@@ -46,7 +43,7 @@ function DetailModal(proops: DeleteModalProps): React.JSX.Element {
       }
     }
     getDriver();
-  }, [proops, navigate]);
+  }, [proops]);
 
   return (
     <div
