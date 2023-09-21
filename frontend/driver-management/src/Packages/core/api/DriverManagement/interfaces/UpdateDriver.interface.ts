@@ -1,4 +1,5 @@
 export interface UpdateDriverInput {
+  id: string;
   name: string;
   dateOfBirth: Date;
   drivingLicenseNumber: string;

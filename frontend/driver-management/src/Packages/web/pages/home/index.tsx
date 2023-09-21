@@ -4,7 +4,7 @@ import {
   GetAllDrivers,
 } from "../../../core/api/DriverManagement/DriverManagment";
 import { Driver } from "../../../core/api/types";
-import { MagnifyingGlass } from "react-loader-spinner";
+import { Triangle } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import * as S from "./styles";
 import { Alert, Button, Card, Stack } from "react-bootstrap";
@@ -52,15 +52,13 @@ export default function HomePage(): React.JSX.Element {
       <S.Title>Motoritas Cadastrados</S.Title>
       {!drivers ? (
         <S.Container>
-          <MagnifyingGlass
-            visible={true}
+          <Triangle
             height="80"
             width="80"
-            ariaLabel="MagnifyingGlass-loading"
-            wrapperStyle={{}}
-            wrapperClass="MagnifyingGlass-wrapper"
-            glassColor="#c0efff"
             color="#1c02af"
+            ariaLabel="triangle-loading"
+            wrapperStyle={{}}
+            visible={true}
           />
         </S.Container>
       ) : (
