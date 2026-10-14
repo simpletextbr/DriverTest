@@ -7,7 +7,7 @@ export default defineConfig({
     host: true,
     port: 3001,
     hmr: {
-      port: 3001,
+      clientPort: 3001,
     },
   },
   plugins: [react()],
